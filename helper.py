@@ -94,7 +94,7 @@ class ewriter():
             SystemMessage(content=self.RESEARCH_PLAN_PROMPT),
             HumanMessage(content=state['task'])
         ])
-        content = state['content'] or []  # add to content
+        content = state['content'] or []  # KD: add to content
         for q in queries.queries:
             response = self.tavily.search(query=q, max_results=2)
             for r in response['results']:
@@ -273,9 +273,9 @@ class writer_gui( ):
         nnode = new_state.next
         return lnode,nnode,new_thread_ts,rev,count
     
-    def update_thread_pd(self,):
+    def update_thread_pd(self,): 
         #print("update_thread_pd")
-        return gr.Dropdown(label="choose thread", choices=threads, value=self.thread_id,interactive=True)
+        return gr.Dropdown(label="choose thread", choices=self.threads, value=self.thread_id,interactive=True)#check threads
     
     def switch_thread(self,new_thread_id):
         #print(f"switch_thread{new_thread_id}")
